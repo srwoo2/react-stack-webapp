@@ -7,6 +7,7 @@ import NewsDetailView from '../pages/news/NewsDetailView';
 import NewsFeedView from '../pages/news/NewsFeedView';
 import Schedule from '../pages/schedule';
 import { RouteMenuItem } from '../types/core.type';
+import { UserRole } from '../utils/constants';
 
 export const routeConfig: RouteMenuItem[] = [
   {
@@ -57,7 +58,7 @@ export const routeConfig: RouteMenuItem[] = [
     element: Admin,
     showInMenu: true,
     authRequired: true,
-    roles: ['admin'],
+    roles: [UserRole.ADMIN],
   },
   {
     path: '/mypage/schedule',
@@ -65,7 +66,7 @@ export const routeConfig: RouteMenuItem[] = [
     element: Schedule,
     showInMenu: true,
     authRequired: true,
-    roles: ['user', 'admin'],
+    roles: [UserRole.USER, UserRole.ADMIN],
   },
 ];
 

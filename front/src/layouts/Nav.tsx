@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import routeConfig from '../routes/route';
 import { StyledNav, StyledNavItem, StyledNavItemIink, StyledNavItemWrap } from '../styles/layout.style';
 import { RouteMenuItem } from '../types/core.type';
+import { CookieKey, UserRole } from '../utils/constants';
 import { getCookie } from '../utils/cookie';
-import { CookieKey } from '../utils/constants';
 
 interface NavProp {
   isLoggedIn: boolean;
 }
 
 const Nav: React.FC<NavProp> = ({ isLoggedIn }) => {
-  const userRole = getCookie(CookieKey.ROLE) || '';
+  const userRole = getCookie(CookieKey.ROLE) || UserRole.USER;
 
   const menuItems: RouteMenuItem[] = routeConfig.filter((route: RouteMenuItem) => {
     if (!route.showInMenu) return false;
