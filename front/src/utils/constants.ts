@@ -21,3 +21,16 @@ export const UserRole = {
   USER: 'user',
   ADMIN: 'admin',
 };
+
+export const RouteLink = {
+  MAIN: '/',
+  LOGIN: '/login',
+  BOARD: '/board',
+  NEWS: '/page/1',
+  NEWS_DETAIL: '/show/:id',
+  CHAT: '/chat/*',
+  ADMIN: '/admin/*',
+  SCHEDULE: '/mypage/schedule',
+  FORBIDDEN: '/forbidden',
+  DEFAULT: '*',
+};

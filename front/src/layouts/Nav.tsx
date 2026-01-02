@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import routeConfig from '../routes/route';
+import routeConfig from '../routes';
 import { StyledNav, StyledNavItem, StyledNavItemIink, StyledNavItemWrap } from '../styles/layout.style';
 import { RouteMenuItem } from '../types/core.type';
-import { CookieKey, UserRole } from '../utils/constants';
-import { getCookie } from '../utils/cookie';
 
 interface NavProp {
-  isLoggedIn: boolean;
+  userRole?: string;
 }
 
-const Nav: React.FC<NavProp> = ({ isLoggedIn }) => {
-  const userRole = getCookie(CookieKey.ROLE) || UserRole.USER;
-
+const Nav: React.FC<NavProp> = ({ userRole }) => {
   const menuItems: RouteMenuItem[] = routeConfig.filter((route: RouteMenuItem) => {
+    /**
+     * 메뉴 필터링
+     * 1. 메뉴 표시 여부 확인
+     * 2. 권한 여부 확인
+     */
     if (!route.showInMenu) return false;
-    if (route.authRequired && !isLoggedIn) return false;
-    if (route.roles && (!userRole || !route.roles.includes(userRole))) return false;
-    return true;
+    if (!route.roles || route.roles.length === 0) return true;
+    return !!userRole && route.roles.includes(userRole);
   });
 
   return (
