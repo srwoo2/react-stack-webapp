@@ -24,6 +24,6 @@ export const deleteAllCookies = () => {
 
   cookies.forEach((cookie) => {
     const cookieName = cookie.split('=')[0];
-    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1999 00:00:01 GMT; path=/`;
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1999 00:00:10 GMT; path=/`;
   });
 };
