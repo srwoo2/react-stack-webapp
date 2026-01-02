@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export type ProductType = {
   name: string;
@@ -7,16 +7,19 @@ export type ProductType = {
 };
 
 export interface RouteItem {
-  label: string; // 라우터 설명
-  path: string;  // 라우터 경로
-  element: React.ElementType; // 컴포넌트
-  authRequired: boolean; // 로그인 필요 여부
+  path: string;
+  element: React.ElementType;
+  authRequired: boolean;
 }
 
 export interface MenuItem {
-  label: string; // 메뉴명
-  showInMenu: boolean; // 메뉴 표시 여부
-  roles?: string[]; // 메뉴 권한
+  label?: string;
+  showInMenu: boolean;
+  roles?: string[];
 }
 
-export type RouteMenuItem = RouteItem & MenuItem;
+export type LayoutType = 'header' | 'nav' | 'footer';
+
+export interface RouteMenuItem extends RouteItem, MenuItem {
+  layout?: LayoutType[];
+}

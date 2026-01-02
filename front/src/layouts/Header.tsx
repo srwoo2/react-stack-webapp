@@ -1,27 +1,30 @@
 import React from 'react';
 import { StyledA, StyledDiv, StyledHeader, StyledHeaderItemWrap, StyledHeaderLogo } from '../styles/layout.style';
-import { WordKey } from '../utils/constants';
+import { RouteLink, WordKey } from '../utils/constants';
+import { deleteAllCookies } from '../utils/cookie';
 
 interface HeaderProp {
-  isLoggedIn: boolean;
+  userId?: string;
 }
 
-const Header: React.FC<HeaderProp> = ({ isLoggedIn }) => {
+const Header: React.FC<HeaderProp> = ({ userId }) => {
   const logout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
+    deleteAllCookies();
+    window.location.href = RouteLink.LOGIN;
   };
 
   return (
     <StyledHeader>
-      <StyledHeaderLogo href="/">{WordKey.PROJECT_NAME}</StyledHeaderLogo>
+      <StyledHeaderLogo href={RouteLink.MAIN}>{WordKey.PROJECT_NAME}</StyledHeaderLogo>
       <StyledHeaderItemWrap>
-        {isLoggedIn ? (
+        {userId ? (
           <>
-            <StyledDiv>{localStorage.getItem('id')}님</StyledDiv>
+            <StyledDiv>{userId}님</StyledDiv>
             <StyledA onClick={logout}>로그아웃</StyledA>
           </>
-        ) : <StyledA href="/login">로그인</StyledA>}
+        ) : (
+          <StyledA href={RouteLink.LOGIN}>로그인</StyledA>
+        )}
       </StyledHeaderItemWrap>
     </StyledHeader>
   );

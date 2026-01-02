@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CommonButton, CommonForm, CommonInput } from '../../styles/common.style';
-import { WordKey } from '../../utils/constants';
+import { CookieKey, UserRole, WordKey } from '../../utils/constants';
+import { setCookie } from '../../utils/cookie';
 
 const Login: React.FC = () => {
   const [userId, setUserId] = useState<string>('');
@@ -20,9 +21,12 @@ const Login: React.FC = () => {
     e.preventDefault();
 
     if (userId && password) {
-      localStorage.setItem('token', 'abcdefg');
-      localStorage.setItem('id', userId);
-      localStorage.setItem('role', 'admin');
+      const role = userId === 'admin' ? UserRole.ADMIN : UserRole.USER;
+      const accessToken = 'abcdefg';
+
+      setCookie(CookieKey.ACCESS_TOKEN, accessToken, 1);
+      setCookie(CookieKey.USER_ID, userId);
+      setCookie(CookieKey.ROLE, role);
       window.location.href = '/';
     } else {
       setMsg('아이디와 비밀번호를 확인하세요.');
