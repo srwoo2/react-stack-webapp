@@ -1,8 +1,8 @@
 {
-  "name": "react-frontend-project",
+  "name": "react-stack-webapp",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://selim0915.github.io/react-frontend-project/",
+  "homepage": "https://selim0915.github.io/react-stack-webapp/",
   "scripts": {
     "test": "jest",
     "lint": "eslint --cache ./",
