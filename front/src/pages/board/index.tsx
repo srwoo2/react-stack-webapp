@@ -14,8 +14,6 @@ const Board: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [productList, setProductList] = useState<ProductType[]>([]);
-  const [shouldCrash, setShouldCrash] = useState(false);
-
   useEffect(() => {
     const handler = () => {
       const state = store.getState();
@@ -24,10 +22,6 @@ const Board: React.FC = () => {
     };
     store.subscribe(handler);
   }, []);
-
-  if (shouldCrash) {
-    throw new Error('Test Crash: Sentry Error Boundary is working!');
-  }
 
   const handleIncrease = () => {
     store.dispatch(Actions.increase());
@@ -102,14 +96,6 @@ const Board: React.FC = () => {
           onClick={handleReset}
         >
           Reset
-        </button>
-        <button
-          type="button"
-          id="btn-crash"
-          className="px-4 py-2 border border-red-300 bg-red-50 text-red-600 rounded hover:bg-red-100"
-          onClick={() => setShouldCrash(true)}
-        >
-          Crash App (Test)
         </button>
       </div>
 
