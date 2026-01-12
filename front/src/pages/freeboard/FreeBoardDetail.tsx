@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-shadow */
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import APIs from '../../apis';
 import { useAppDispatch } from '../../store/hooks';
@@ -39,26 +40,24 @@ const FreeBoardDetail: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [comments, setComments] = useState<NewsComment[]>([]);
+  const { data } = useQuery({
+    queryKey: ['freeboard', 'detail', id],
+    queryFn: async () => {
+      if (!id) throw new Error('No ID');
+      const api = new APIs.Freeboard.NewsDetailApi(id);
+      return api.getData();
+    },
+    enabled: !!id,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const { title = '', content = '', comments = [] } = data || {};
 
   useEffect(() => {
-    const fetchDetail = async () => {
-      if (id) {
-        const api = new APIs.Freeboard.NewsDetailApi(id);
-        const { title, content, comments } = await api.getData();
-
-        setTitle(title);
-        setContent(content);
-        setComments(comments);
-
-        dispatch(makeRead(Number(id)));
-      }
-    };
-
-    fetchDetail();
-  }, [id, dispatch]);
+    if (id && data) {
+      dispatch(makeRead(Number(id)));
+    }
+  }, [id, data, dispatch]);
 
   return (
     <div>

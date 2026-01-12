@@ -1,41 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import APIs from '../../apis';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { setFeeds } from '../../store/slices/newsSlice';
-import { CommonButton, CommonSubTitle, CommonTitle } from '../../styles/common.style';
+import { CommonTitle } from '../../styles/common.style';
 import { NewsFeed } from '../../types/newFeed.type';
 import { RouteLink } from '../../utils/constants';
 
 export const FreeBoardList: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const reduxFeeds = useAppSelector((state) => state.news.feeds);
   const { page = '1' } = useParams();
   const currentPage = Number(page);
-  const [localfeeds, setLocalFeeds] = useState<NewsFeed[]>([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchFeeds = async () => {
-      if (!(reduxFeeds.length > 0)) {
-        const api = new APIs.Freeboard.NewsFeedApi();
-        const data: NewsFeed[] = await api.getData();
-        setLocalFeeds(data);
-        dispatch(setFeeds(data));
-      } else {
-        setLocalFeeds(reduxFeeds);
-      }
-    };
-
-    fetchFeeds();
-  }, [reduxFeeds, dispatch]);
+  const { data: feeds = [] } = useQuery({
+    queryKey: ['freeboard', 'list'],
+    queryFn: async () => {
+      const api = new APIs.Freeboard.NewsFeedApi();
+      const data = await api.getData();
+      // Add 'read' property as it was done previously
+      return data.map((feed: NewsFeed) => ({ ...feed, read: false }));
+    },
+    staleTime: 5 * 60 * 1000,
+  });
 
   const itemsPerPage = 10;
   const start = (currentPage - 1) * itemsPerPage;
   const end = currentPage * itemsPerPage;
-  const currentFeeds = localfeeds.slice(start, end);
+  const currentFeeds = feeds.slice(start, end);
 
-  const lastPage = Math.ceil(localfeeds.length / itemsPerPage) || 1;
+  const lastPage = Math.ceil(feeds.length / itemsPerPage) || 1;
   const prevPage = currentPage > 1 ? currentPage - 1 : 1;
   const nextPage = currentPage < lastPage ? currentPage + 1 : lastPage;
 
@@ -102,7 +94,7 @@ export const FreeBoardList: React.FC = () => {
 
       <div style={{ marginBottom: '20px' }}>
         <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
-          총 게시글 <span style={{ color: '#0071e3', fontWeight: 'bold' }}>{localfeeds.length}</span>개
+          총 게시글 <span style={{ color: '#0071e3', fontWeight: 'bold' }}>{feeds.length}</span>개
         </div>
       </div>
 

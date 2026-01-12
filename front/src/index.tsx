@@ -1,11 +1,15 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './app';
 import { AuthProvider } from './context/AuthContext';
 import { initSentry } from './lib/sentry';
 import { store } from './store';
 import GlobalStyle from './styles/global.style';
+
+
+const queryClient = new QueryClient();
 
 initSentry();
 
@@ -14,12 +18,14 @@ if (rootElement) {
   const root = createRoot(rootElement);
   root.render(
     <Provider store={store}>
-      <AuthProvider>
-        <React.StrictMode>
-          <GlobalStyle />
-          <App />
-        </React.StrictMode>
-      </AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <React.StrictMode>
+            <GlobalStyle />
+            <App />
+          </React.StrictMode>
+        </AuthProvider>
+      </QueryClientProvider>
     </Provider>,
   );
 }
