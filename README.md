@@ -4,7 +4,7 @@ React 스택으로 구축된 현대적인 웹 애플리케이션입니다.
 
 * 🔗 https://react-stack-webapp.vercel.app
 
----
+<br />
 
 ## 1. 개요 (Overview)
 
@@ -30,15 +30,16 @@ React 스택으로 구축된 현대적인 웹 애플리케이션입니다.
 - **데이터베이스**: 확장 가능한 NoSQL 데이터 관리
 - **테스트 환경**: 통합 품질 보증 환경
 
----
+<br />
 
 ## 2. 프로젝트 설정
 
 ### 2.1. 초기 설정
 #### 2.1.1. Node.js 환경 구성
+vercel build 하기 위해 node는 20.19.6 이상이 필요합니다.
 ```bash
-$ nvm install 20.10.0
-$ nvm use 20.10.0
+$ nvm install 20.19.6
+$ nvm use 20.19.6
 $ node -v
 $ npm install
 ```
@@ -49,8 +50,6 @@ $ npm install
 $ mkdir cert
 $ openssl req -nodes -new -x509 -keyout cert/key.pem -out cert/cert.pem -days 365 -config cert/openssl.cnf
 ```
-
----
 
 ### 2.2. 실행 방법
 
@@ -72,7 +71,7 @@ $ npm run server:no-db # DB 없이 실행
 $ npm run start
 ```
 
----
+<br />
 
 ## 3. 빌드 및 배포
 

@@ -10,7 +10,7 @@ import { ProductType } from '../../types/core.type';
 // store 미들웨어 추가
 const store = createStore(reducer, [resetCountMiddleware, logger, asyncRouter(asyncJobs)]);
 
-const Board: React.FC = () => {
+const TestPage: React.FC = () => {
   const [count, setCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [productList, setProductList] = useState<ProductType[]>([]);
@@ -53,7 +53,7 @@ const Board: React.FC = () => {
 
   return (
     <>
-      <h1>Board Page</h1>
+      <h1>Admin Test Page</h1>
 
       <div>
         <p id="counter" className="text-2xl">
@@ -114,4 +114,4 @@ const Board: React.FC = () => {
   );
 };
 
-export default Board;
+export default TestPage;

@@ -1,5 +1,9 @@
 import Admin from '../pages/admin';
-import Board from '../pages/board';
+// import Board from '../pages/board'; // Removed to avoid confusion with new board pages
+import TestPage from '../pages/admin/TestPage';
+import BoardDetail from '../pages/board/BoardDetail';
+import BoardForm from '../pages/board/BoardForm';
+import BoardList from '../pages/board/BoardList';
 import Chat from '../pages/chat';
 import Forbidden from '../pages/error/Forbidden';
 import NotFound from '../pages/error/NotFound';
@@ -44,8 +48,29 @@ export const routeConfig: RouteMenuItem[] = [
   {
     path: RouteLink.BOARD,
     label: '자유게시판',
-    element: Board,
+    element: BoardList,
     showInMenu: true,
+    authRequired: true,
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.BOARD_WRITE,
+    element: BoardForm,
+    showInMenu: false,
+    authRequired: true,
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.BOARD_DETAIL,
+    element: BoardDetail,
+    showInMenu: false,
+    authRequired: true,
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.BOARD_EDIT,
+    element: BoardForm,
+    showInMenu: false,
     authRequired: true,
     layout: ['header', 'nav', 'footer'],
   },
@@ -61,6 +86,15 @@ export const routeConfig: RouteMenuItem[] = [
     path: RouteLink.ADMIN,
     label: '관리자 설정',
     element: Admin,
+    showInMenu: true,
+    authRequired: true,
+    roles: [UserRole.ADMIN],
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.ADMIN_TEST,
+    label: 'TEST',
+    element: TestPage,
     showInMenu: true,
     authRequired: true,
     roles: [UserRole.ADMIN],
