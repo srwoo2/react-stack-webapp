@@ -20,7 +20,7 @@ interface Post {
   createdAt: string;
 }
 
-const BoardForm: React.FC = () => {
+const NoticeForm: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { userId, userRole } = useAuth();
@@ -38,7 +38,7 @@ const BoardForm: React.FC = () => {
         if (post) {
           if (userId !== post.author && userRole !== UserRole.ADMIN) {
             alert('권한이 없습니다.');
-            navigate(RouteLink.BOARD);
+            navigate(RouteLink.NOTICE);
             return;
           }
           setTitle(post.title);
@@ -62,7 +62,7 @@ const BoardForm: React.FC = () => {
     if (isEdit) {
       const updatedPosts = posts.map((p: Post) => (p.id === Number(id) ? { ...p, title, content } : p));
       localStorage.setItem('board_posts', JSON.stringify(updatedPosts));
-      navigate(RouteLink.BOARD_DETAIL.replace(':id', id || ''));
+      navigate(RouteLink.NOTICE_DETAIL.replace(':id', id || ''));
     } else {
       const newPost = {
         id: posts.length > 0 ? Math.max(...posts.map((p: any) => p.id)) + 1 : 1,
@@ -73,13 +73,13 @@ const BoardForm: React.FC = () => {
       };
       const updatedPosts = [newPost, ...posts];
       localStorage.setItem('board_posts', JSON.stringify(updatedPosts));
-      navigate(RouteLink.BOARD);
+      navigate(RouteLink.NOTICE);
     }
   };
 
   return (
     <div>
-      <CommonTitle>자유게시판 {isEdit ? '수정' : '등록'}</CommonTitle>
+      <CommonTitle>공지사항 {isEdit ? '수정' : '등록'}</CommonTitle>
 
       <CommonForm onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
         <CommonInput
@@ -101,14 +101,14 @@ const BoardForm: React.FC = () => {
           <CommonButton
             type="button"
             onClick={() =>
-              isEdit ? navigate(RouteLink.BOARD_DETAIL.replace(':id', id || '')) : navigate(RouteLink.BOARD)
+              isEdit ? navigate(RouteLink.NOTICE_DETAIL.replace(':id', id || '')) : navigate(RouteLink.NOTICE)
             }
             style={{ width: 'auto', padding: '10px 24px', backgroundColor: '#86868b' }}
           >
             취소
           </CommonButton>
           <CommonButton type="submit" style={{ width: 'auto', padding: '10px 24px' }}>
-            {isEdit ? '수정완료' : '등록'}
+            저장
           </CommonButton>
         </div>
       </CommonForm>
@@ -116,4 +116,4 @@ const BoardForm: React.FC = () => {
   );
 };
 
-export default BoardForm;
+export default NoticeForm;

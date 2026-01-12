@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Table, TH } from '../../components/Table';
-import { CommonButton, CommonSubTitle, CommonTitle } from '../../styles/common.style';
+import { CommonButton, CommonTitle } from '../../styles/common.style';
 import { RouteLink } from '../../utils/constants';
 import { formatDate } from '../../utils/utils';
 
@@ -12,7 +12,7 @@ interface Post {
   createdAt: string;
 }
 
-const BoardList: React.FC = () => {
+const NoticeList: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -43,7 +43,7 @@ const BoardList: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>자유게시판 목록</CommonTitle>
+      <CommonTitle>공지사항 목록</CommonTitle>
 
       <div style={{ marginBottom: '20px' }}>
         <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
@@ -65,7 +65,7 @@ const BoardList: React.FC = () => {
             <tr key={post.id}>
               <td className="center">{post.id}</td>
               <td>
-                <Link to={RouteLink.BOARD_DETAIL.replace(':id', post.id.toString())}>{post.title}</Link>
+                <Link to={RouteLink.NOTICE_DETAIL.replace(':id', post.id.toString())}>{post.title}</Link>
               </td>
               <td className="center">{post.author}</td>
               <td className="center">{post.createdAt}</td>
@@ -91,7 +91,24 @@ const BoardList: React.FC = () => {
           minHeight: '40px',
         }}
       >
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            style={{
+              padding: '0 12px',
+              height: '32px',
+              border: '1px solid #d2d2d7',
+              borderRadius: '4px',
+              backgroundColor: 'white',
+              color: currentPage === 1 ? '#d2d2d7' : '#1d1d1f',
+              cursor: currentPage === 1 ? 'default' : 'pointer',
+              fontSize: '14px',
+            }}
+          >
+            이전
+          </button>
+
           {Array.from({ length: totalPages }, (_, i) => (
             <button
               key={i + 1}
@@ -114,10 +131,30 @@ const BoardList: React.FC = () => {
               {i + 1}
             </button>
           ))}
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            style={{
+              padding: '0 12px',
+              height: '32px',
+              border: '1px solid #d2d2d7',
+              borderRadius: '4px',
+              backgroundColor: 'white',
+              color: currentPage === totalPages ? '#d2d2d7' : '#1d1d1f',
+              cursor: currentPage === totalPages ? 'default' : 'pointer',
+              fontSize: '14px',
+            }}
+          >
+            다음
+          </button>
         </div>
 
         <div style={{ position: 'absolute', right: 0 }}>
-          <CommonButton onClick={() => navigate(RouteLink.BOARD_WRITE)} style={{ width: 'auto', padding: '10px 24px' }}>
+          <CommonButton
+            onClick={() => navigate(RouteLink.NOTICE_WRITE)}
+            style={{ width: 'auto', padding: '10px 24px' }}
+          >
             글쓰기
           </CommonButton>
         </div>
@@ -126,4 +163,4 @@ const BoardList: React.FC = () => {
   );
 };
 
-export default BoardList;
+export default NoticeList;

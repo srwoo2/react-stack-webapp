@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { CommonButton, CommonSubTitle, CommonTitle } from '../../styles/common.style';
+import { CommonButton, CommonTitle } from '../../styles/common.style';
 import { RouteLink, UserRole } from '../../utils/constants';
 
 interface Post {
@@ -12,7 +12,7 @@ interface Post {
   createdAt: string;
 }
 
-const BoardDetail: React.FC = () => {
+const NoticeDetail: React.FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { userId, userRole } = useAuth();
@@ -27,7 +27,7 @@ const BoardDetail: React.FC = () => {
         setPost(foundPost);
       } else {
         alert('존재하지 않는 게시글입니다.');
-        navigate(RouteLink.BOARD);
+        navigate(RouteLink.NOTICE);
       }
     }
   }, [id, navigate]);
@@ -40,7 +40,7 @@ const BoardDetail: React.FC = () => {
       const posts = JSON.parse(savedPosts);
       const updatedPosts = posts.filter((p: Post) => p.id !== Number(id));
       localStorage.setItem('board_posts', JSON.stringify(updatedPosts));
-      navigate(RouteLink.BOARD);
+      navigate(RouteLink.NOTICE);
     }
   };
 
@@ -48,7 +48,7 @@ const BoardDetail: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>자유게시판 상세보기</CommonTitle>
+      <CommonTitle>공지사항 상세보기</CommonTitle>
 
       <div style={{ borderBottom: '1px solid #eee', paddingBottom: '20px', marginBottom: '20px', marginTop: '30px' }}>
         <h2 style={{ fontSize: '24px', fontWeight: '600' }}>{post.title}</h2>
@@ -59,9 +59,11 @@ const BoardDetail: React.FC = () => {
 
       <div style={{ minHeight: '300px', whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>{post.content}</div>
 
-      <div style={{ marginTop: '40px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px' }}>
+      <div
+        style={{ marginTop: '40px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px' }}
+      >
         <CommonButton
-          onClick={() => navigate(RouteLink.BOARD)}
+          onClick={() => navigate(RouteLink.NOTICE)}
           style={{ width: 'auto', padding: '10px 24px', backgroundColor: '#86868b' }}
         >
           목록
@@ -70,7 +72,7 @@ const BoardDetail: React.FC = () => {
         {(userId === post.author || userRole === UserRole.ADMIN) && (
           <div style={{ display: 'flex', gap: '10px' }}>
             <CommonButton
-              onClick={() => navigate(RouteLink.BOARD_EDIT.replace(':id', post.id.toString()))}
+              onClick={() => navigate(RouteLink.NOTICE_EDIT.replace(':id', post.id.toString()))}
               style={{ width: 'auto', padding: '10px 24px', backgroundColor: '#0071e3' }}
             >
               수정
@@ -88,4 +90,4 @@ const BoardDetail: React.FC = () => {
   );
 };
 
-export default BoardDetail;
+export default NoticeDetail;

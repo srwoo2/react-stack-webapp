@@ -1,16 +1,15 @@
 import Admin from '../pages/admin';
-// import Board from '../pages/board'; // Removed to avoid confusion with new board pages
 import TestPage from '../pages/admin/TestPage';
-import BoardDetail from '../pages/board/BoardDetail';
-import BoardForm from '../pages/board/BoardForm';
-import BoardList from '../pages/board/BoardList';
 import Chat from '../pages/chat';
 import Forbidden from '../pages/error/Forbidden';
 import NotFound from '../pages/error/NotFound';
+import FreeBoardDetail from '../pages/freeboard/FreeBoardDetail';
+import FreeBoardList from '../pages/freeboard/FreeBoardList';
 import Login from '../pages/login';
 import Main from '../pages/main';
-import NewsDetailView from '../pages/news/NewsDetailView';
-import NewsFeedView from '../pages/news/NewsFeedView';
+import NoticeDetail from '../pages/notice/NoticeDetail';
+import NoticeForm from '../pages/notice/NoticeForm';
+import NoticeList from '../pages/notice/NoticeList';
 import Schedule from '../pages/schedule';
 import { RouteMenuItem } from '../types/core.type';
 import { RouteLink, UserRole } from '../utils/constants';
@@ -31,45 +30,45 @@ export const routeConfig: RouteMenuItem[] = [
     layout: ['footer'],
   },
   {
-    path: RouteLink.NEWS,
+    path: RouteLink.NOTICE,
     label: '공지사항',
-    element: NewsFeedView,
+    element: NoticeList,
     showInMenu: true,
     authRequired: false,
     layout: ['header', 'nav', 'footer'],
   },
   {
-    path: RouteLink.NEWS_DETAIL,
-    element: NewsDetailView,
+    path: RouteLink.NOTICE_WRITE,
+    element: NoticeForm,
+    showInMenu: false,
+    authRequired: true,
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.NOTICE_DETAIL,
+    element: NoticeDetail,
     showInMenu: false,
     authRequired: false,
     layout: ['header', 'nav', 'footer'],
   },
   {
-    path: RouteLink.BOARD,
+    path: RouteLink.NOTICE_EDIT,
+    element: NoticeForm,
+    showInMenu: false,
+    authRequired: true,
+    layout: ['header', 'nav', 'footer'],
+  },
+  {
+    path: RouteLink.FREE_BOARD,
     label: '자유게시판',
-    element: BoardList,
+    element: FreeBoardList,
     showInMenu: true,
     authRequired: true,
     layout: ['header', 'nav', 'footer'],
   },
   {
-    path: RouteLink.BOARD_WRITE,
-    element: BoardForm,
-    showInMenu: false,
-    authRequired: true,
-    layout: ['header', 'nav', 'footer'],
-  },
-  {
-    path: RouteLink.BOARD_DETAIL,
-    element: BoardDetail,
-    showInMenu: false,
-    authRequired: true,
-    layout: ['header', 'nav', 'footer'],
-  },
-  {
-    path: RouteLink.BOARD_EDIT,
-    element: BoardForm,
+    path: RouteLink.FREE_BOARD_DETAIL,
+    element: FreeBoardDetail,
     showInMenu: false,
     authRequired: true,
     layout: ['header', 'nav', 'footer'],
