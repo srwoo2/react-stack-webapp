@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ProtectedRoute from '../components/ProtectedRoute';
 import useAccess from '../hooks/useAccess';
-import useAuth from '../hooks/useAuth';
 import Footer from '../layouts/Footer';
 import Header from '../layouts/Header';
 import Nav from '../layouts/Nav';
@@ -10,15 +9,14 @@ import { StyledArticle, StyledContent, StyledMain } from '../styles/layout.style
 import { routeConfig } from './index';
 
 const AppRouter: React.FC = () => {
-  const { isLoggedIn, userRole, userId } = useAuth();
   const { currentRoute } = useAccess();
 
   const currentLayout = currentRoute?.layout || [];
 
   return (
     <StyledMain>
-      {currentLayout.includes('header') && <Header userId={userId} />}
-      {currentLayout.includes('nav') && isLoggedIn && <Nav userRole={userRole} />}
+      {currentLayout.includes('header') && <Header />}
+      {currentLayout.includes('nav') && <Nav />}
 
       <StyledArticle>
         <StyledContent>

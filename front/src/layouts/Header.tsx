@@ -1,21 +1,24 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import { ActionLink, HeaderActions, HeaderWrapper, LogoSection, StatusText } from '../styles/layout.style';
 import { RouteLink, WordKey } from '../utils/constants';
-import { deleteAllCookies } from '../utils/cookie';
 
-interface HeaderProp {
-  userId?: string;
-}
+const Header: React.FC = () => {
+  const { userId, logout: authLogout } = useAuth();
+  const navigate = useNavigate();
 
-const Header: React.FC<HeaderProp> = ({ userId }) => {
   const logout = () => {
-    deleteAllCookies();
-    window.location.href = RouteLink.LOGIN;
+    authLogout(() => {
+      navigate(RouteLink.MAIN);
+    });
   };
 
   return (
     <HeaderWrapper>
-      <LogoSection href={RouteLink.MAIN}>{WordKey.PROJECT_NAME}</LogoSection>
+      <LogoSection onClick={() => navigate(RouteLink.MAIN)} style={{ cursor: 'pointer' }}>
+        {WordKey.PROJECT_NAME}
+      </LogoSection>
 
       <HeaderActions>
         {userId ? (
@@ -24,7 +27,7 @@ const Header: React.FC<HeaderProp> = ({ userId }) => {
             <ActionLink onClick={logout}>로그아웃</ActionLink>
           </>
         ) : (
-          <ActionLink href={RouteLink.LOGIN}>로그인</ActionLink>
+          <ActionLink onClick={() => navigate(RouteLink.LOGIN)}>로그인</ActionLink>
         )}
       </HeaderActions>
     </HeaderWrapper>

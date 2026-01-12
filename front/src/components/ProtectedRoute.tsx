@@ -13,18 +13,20 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ authRequired, roles, ch
   const { isLoggedIn, userRole } = useAuth();
   const location = useLocation();
 
-  // 1. 이미 로그인된 상태에서 로그인 페이지 접근 시 이전 페이지나 메인으로 이동
-  if (isLoggedIn && !authRequired) {
-    return <Navigate to={RouteLink.MAIN} replace />;
+  // 1. 인증이 필요 없는 페이지(Public)는 조건 없이 렌더링
+  if (!authRequired) {
+    // 단, 로그인 페이지처럼 '이미 로그인된 상태'에서 가면 안 되는 경우를 처리하고 싶다면 여기서 처리 가능
+    // 현재는 모든 Public 페이지를 허용
+    return children as React.ReactElement;
   }
 
   // 2. 인증이 필요한데 로그인하지 않은 경우
-  if (!isLoggedIn && authRequired) {
+  if (!isLoggedIn) {
     return <Navigate to={RouteLink.LOGIN} state={{ from: location }} replace />;
   }
 
   // 3. 권한(Role) 체크가 필요한 경우
-  if (isLoggedIn && roles && !roles.includes(userRole || '')) {
+  if (roles && !roles.includes(userRole || '')) {
     return <Navigate to={RouteLink.FORBIDDEN} replace />;
   }
 

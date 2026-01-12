@@ -1,23 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import routeConfig from '../routes';
 import { StyledNav, StyledNavItem, StyledNavItemIink, StyledNavItemWrap } from '../styles/layout.style';
 import { RouteMenuItem } from '../types/core.type';
 
-interface NavProp {
-  userRole?: string;
-}
+const Nav: React.FC = () => {
+  const { isLoggedIn, userRole } = useAuth();
 
-const Nav: React.FC<NavProp> = ({ userRole }) => {
   const menuItems: RouteMenuItem[] = routeConfig.filter((route: RouteMenuItem) => {
-    /**
-     * 메뉴 필터링
-     * 1. 메뉴 표시 여부 확인
-     * 2. 권한 여부 확인
-     */
     if (!route.showInMenu) return false;
-    if (!route.roles || route.roles.length === 0) return true;
-    return !!userRole && route.roles.includes(userRole);
+
+    // 1. 비로그인 상태일 때: 인증이 필요한 메뉴는 숨김
+    if (!isLoggedIn && route.authRequired) return false;
+
+    // 2. 로그인 상태일 때: 역할(Role) 제한이 있다면 체크
+    if (isLoggedIn && route.roles && route.roles.length > 0) {
+      return route.roles.includes(userRole || '');
+    }
+
+    return true;
   });
 
   return (

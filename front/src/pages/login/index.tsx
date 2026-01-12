@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import { CommonButton, CommonForm, CommonImage, CommonInput, CommonInputText } from '../../styles/common.style';
 import { LoginLayout } from '../../styles/layout.style';
-import { CookieKey, UserRole } from '../../utils/constants';
-import { setCookie } from '../../utils/cookie';
+import { UserRole } from '../../utils/constants';
 import { sampeople } from '../../utils/image.import';
 
 const Login: React.FC = () => {
+  const { login: authLogin } = useAuth();
+  const navigate = useNavigate();
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
@@ -26,10 +29,8 @@ const Login: React.FC = () => {
       const role = userId === 'admin' ? UserRole.ADMIN : UserRole.USER;
       const accessToken = 'abcdefg';
 
-      setCookie(CookieKey.ACCESS_TOKEN, accessToken, 1);
-      setCookie(CookieKey.USER_ID, userId);
-      setCookie(CookieKey.ROLE, role);
-      window.location.href = '/';
+      authLogin(userId, role, accessToken);
+      navigate('/');
     } else {
       setMsg('아이디와 비밀번호를 확인하세요.');
     }
