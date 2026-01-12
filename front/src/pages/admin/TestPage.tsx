@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
-import api from '../../apis/api.instance';
+import APIs from '../../apis';
 import * as Actions from '../../store/actions';
 import { asyncJobs, asyncRouter, logger, resetCountMiddleware } from '../../store/middleware';
 import reducer from '../../store/reducer';
@@ -40,14 +40,13 @@ const TestPage: React.FC = () => {
   };
 
   useEffect(() => {
-    api
-      .get('/product/list')
-      .then((res) => {
-        setProductList(res.data);
+    APIs.Product.getProducts()
+      .then((data) => {
+        setProductList(data);
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
-        console.error('Board API Error:', err.message);
+        console.error('Product API Error:', err.message);
       });
   }, []);
 

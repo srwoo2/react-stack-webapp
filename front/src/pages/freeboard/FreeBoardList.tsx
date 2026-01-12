@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useNewsStore } from '../..';
-import { NewsFeedApi } from '../../apis/newFeed.api';
+import APIs from '../../apis';
 import { CommonButton, CommonSubTitle, CommonTitle } from '../../styles/common.style';
 import { NewsFeed } from '../../types/newFeed.type';
 import { RouteLink } from '../../utils/constants';
@@ -16,7 +16,7 @@ export const FreeBoardList: React.FC = () => {
   useEffect(() => {
     const fetchFeeds = async () => {
       if (!(store.feeds.length > 0)) {
-        const api = new NewsFeedApi();
+        const api = new APIs.Freeboard.NewsFeedApi();
         const data: NewsFeed[] = await api.getData();
         setLocalFeeds(data);
         store.setFeeds(data);

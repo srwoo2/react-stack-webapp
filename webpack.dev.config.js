@@ -28,7 +28,11 @@ module.exports = {
       directory: path.join(__dirname, 'front/public'),
     },
     proxy: {
-      '/api': 'http://localhost:4000',
+      '/api': {
+        target: 'https://localhost:4000',
+        pathRewrite: { '^/api': '' },
+        secure: false,
+      },
     },
   },
   module: {
@@ -68,12 +72,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'React Stack WebApp',
       template: './front/public/index.html',
-      favicon: './front/public/favicon.ico',
-    }),
-    new HtmlWebpackPlugin({
-      title: 'React Stack WebApp',
-      template: './front/public/index.html',
-      filename: '404.html',
       favicon: './front/public/favicon.ico',
     }),
   ],

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useNewsStore } from '../..';
-import { NewsDetailApi } from '../../apis/newFeed.api';
+import APIs from '../../apis';
 import { CommonButton, CommonTitle } from '../../styles/common.style';
 import { NewsComment } from '../../types/newFeed.type';
 
@@ -45,7 +45,7 @@ const FreeBoardDetail: React.FC = () => {
   useEffect(() => {
     const fetchDetail = async () => {
       if (id) {
-        const api = new NewsDetailApi(id);
+        const api = new APIs.Freeboard.NewsDetailApi(id);
         const { title, content, comments } = await api.getData();
 
         setTitle(title);
