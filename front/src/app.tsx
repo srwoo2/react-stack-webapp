@@ -7,6 +7,7 @@ import AppRouter from './routes/AppRouter';
 const App: React.FC = () => (
   <ErrorBoundary>
     <Router
+      basename="/"
       future={{
         v7_relativeSplatPath: true,
         v7_startTransition: true,

@@ -2,28 +2,42 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/prop-types */
 import { Text } from 'grommet';
 import React from 'react';
-import { timeFormatter } from '../utils/utils.ts';
+import { timeFormatter } from '../utils/utils';
 import { Section } from './Section';
 import { Table } from './Table';
 
-export const SectionList = ({ sectionList, startDiscuss, stopDiscuss, removeSection }) => {
-  const allTime = (key, adjust = 1) =>
+interface SectionData {
+  id: string;
+  est: number;
+  act: number;
+  title: string;
+  isDiscuss: boolean;
+}
+
+interface SectionListProps {
+  sectionList: SectionData[];
+  startDiscuss: (id: string) => void;
+  stopDiscuss: (id: string) => void;
+  removeSection: (id: string) => void;
+}
+
+export const SectionList: React.FC<SectionListProps> = ({ sectionList, startDiscuss, stopDiscuss, removeSection }) => {
+  const allTime = (key: 'est' | 'act', adjust = 1) =>
     timeFormatter(sectionList.map((section) => section[key]).reduce((a, b) => a + b, 0) * adjust);
 
   return (
     <Table>
       <thead>
         <tr>
-          <th className="center" colSpan="2" width="150">
+          <th className="center" colSpan={2} style={{ width: 150 }}>
             Time
           </th>
-          <th className="underline" rowSpan="2">
+          <th className="underline" rowSpan={2}>
             Item
           </th>
-          <th className="center underline" rowSpan="2" width="120">
+          <th className="center underline" rowSpan={2} style={{ width: 120 }}>
             Behavior
           </th>
         </tr>
@@ -51,7 +65,7 @@ export const SectionList = ({ sectionList, startDiscuss, stopDiscuss, removeSect
           <th className="center">
             <Text>{allTime('act')}</Text>
           </th>
-          <th className="underline" colSpan="2" />
+          <th className="underline" colSpan={2} />
         </tr>
       </thead>
     </Table>

@@ -8,20 +8,15 @@ import { NewsComment } from '../../types/newFeed.type';
 
 const Comment: React.FC<{ comment: NewsComment }> = ({ comment }) => (
   <>
-    <div
-      style={{ paddingLeft: `${comment.level * 40}px` }}
-      className="mt-4"
-    >
+    <div style={{ paddingLeft: `${comment.level * 40}px` }} className="mt-4">
       <div className="text-gray-400">
         <i className="fa fa-sort-up mr-2" />
         <strong>{comment.user}</strong> {comment.time_ago}
       </div>
+      {/* eslint-disable-next-line react/no-danger */}
       <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: comment.content }} />
     </div>
-    {comment.comments.length > 0 &&
-      comment.comments.map((child) => (
-        <Comment key={child.id} comment={child} />
-      ))}
+    {comment.comments.length > 0 && comment.comments.map((child) => <Comment key={child.id} comment={child} />)}
   </>
 );
 
@@ -72,6 +67,7 @@ const NewsDetailView: React.FC = () => {
         <h2>{title}</h2>
         <div
           className="text-gray-400 h-20"
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: content }}
         />
 

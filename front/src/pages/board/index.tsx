@@ -46,6 +46,7 @@ const Board: React.FC = () => {
         setProductList(res.data);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error('Board API Error:', err.message);
       });
   }, []);

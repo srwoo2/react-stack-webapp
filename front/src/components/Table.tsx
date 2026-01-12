@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const BaseColor = "#ddd";
-const HeaderColor = "#f0f0f0";
+const BaseColor = '#ddd';
+const HeaderColor = '#f0f0f0';
 
 export const Table = styled.table`
   table-layout: fixed;
@@ -50,6 +50,6 @@ export const Table = styled.table`
   }
 `;
 
-export const TH = styled.th`
-  width: ${size => (size ? `${size}px` : "100%")};
+export const TH = styled.th<{ size?: number }>`
+  width: ${(props) => (props.size ? `${props.size}px` : '100%')};
 `;
