@@ -1,11 +1,30 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable react/prop-types */
-import { Button, Meter, Stack, Text } from 'grommet';
+import { Box, Button, Meter, Stack, Text } from 'grommet';
 import { Trash } from 'grommet-icons';
 import React from 'react';
 import { timeFormatter } from '../utils/utils';
 
-export const Section = ({ id, est, act, title, isDiscuss, removeSection, startDiscuss, stopDiscuss }) => {
+interface SectionProps {
+  id: string;
+  est: number;
+  act: number;
+  title: string;
+  isDiscuss: boolean;
+  removeSection: (id: string) => void;
+  startDiscuss: (id: string) => void;
+  stopDiscuss: (id: string) => void;
+}
+
+export const Section: React.FC<SectionProps> = ({
+  id,
+  est,
+  act,
+  title,
+  isDiscuss,
+  removeSection,
+  startDiscuss,
+  stopDiscuss,
+}) => {
   const initTime = est * 60;
   const remainingTime = () => initTime - act;
 
@@ -34,19 +53,20 @@ export const Section = ({ id, est, act, title, isDiscuss, removeSection, startDi
           >
             {title}
           </Text>
-          <Meter
-            values={[
-              {
-                value: act,
-                color: remainingTime() < 0 ? 'red' : null,
-              },
-            ]}
-            style={{ width: '100%', marginTop: -10 }}
-            max={initTime}
-            background="rgba(0,0,0,0)"
-            thickness="large"
-            opacity={0.2}
-          />
+          <Box style={{ marginTop: -10, opacity: 0.2 }}>
+            <Meter
+              values={[
+                {
+                  value: act,
+                  color: remainingTime() < 0 ? 'red' : undefined,
+                },
+              ]}
+              size="full"
+              max={initTime}
+              background="rgba(0,0,0,0)"
+              thickness="large"
+            />
+          </Box>
         </Stack>
       </td>
       <td className="center">
@@ -54,7 +74,7 @@ export const Section = ({ id, est, act, title, isDiscuss, removeSection, startDi
           plain
           size="small"
           color="#ccc"
-          style={isDiscuss ? { color: 'black', animation: 'blink 1s linear infinite' } : null}
+          style={isDiscuss ? { color: 'black', animation: 'blink 1s linear infinite' } : undefined}
           onClick={() => (isDiscuss ? stopDiscuss(id) : startDiscuss(id))}
           label="Discuss"
         />

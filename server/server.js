@@ -12,16 +12,17 @@ if (process.env.USE_DB === 'true') {
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
+
+const IS_PROD = process.env.NODE_ENV === 'production';
+const webpackConfig = IS_PROD ? require('../webpack.config') : require('../webpack.dev.config');
 const { loadSSL } = require('./config/ssl');
 const logger = require('./config/winston');
 const setupWebSocket = require('./websocket');
-const webpackConfig = require('../webpack.config');
 
 const app = express();
 const NODE_PORT = 4000;
 
 const ROOT = path.resolve(__dirname, '../dist');
-const IS_PROD = process.env.NODE_ENV === 'production';
 
 // cors
 app.use(cors());

@@ -10,8 +10,12 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["front/src/*"]
+    }
   },
-  // "include": ["front/src/**/*"]
-  // "exclude": ["node_modules", "dist", "**/*.js"]
+  "include": ["front/src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

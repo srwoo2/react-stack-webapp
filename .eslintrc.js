@@ -7,7 +7,7 @@ module.exports = {
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: './tsconfig.json',
+    project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
   },
   extends: ['plugin:@typescript-eslint/recommended', 'airbnb', 'airbnb/hooks', 'prettier'],
@@ -43,13 +43,19 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       2,
       {
-        devDependencies: ['front/**/*', 'server/**/*', '**/*.stories.@(js|jsx|ts|tsx)', 'webpack.config.js'],
+        devDependencies: [
+          'front/**/*',
+          'server/**/*',
+          '**/*.stories.@(js|jsx|ts|tsx)',
+          'webpack.config.js',
+          'webpack.dev.config.js',
+        ],
       },
     ],
   },
   overrides: [
     {
-      files: ['server/**/*'],
+      files: ['server/**/*', 'front/src/components/ErrorBoundary.tsx'],
       rules: {
         'no-console': 0,
       },

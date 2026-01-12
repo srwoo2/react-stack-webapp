@@ -16,7 +16,7 @@ export const routeConfig: RouteMenuItem[] = [
     path: RouteLink.MAIN,
     element: Main,
     showInMenu: false,
-    authRequired: true,
+    authRequired: false,
     layout: ['header', 'nav', 'footer'],
   },
   {
@@ -39,14 +39,14 @@ export const routeConfig: RouteMenuItem[] = [
     label: '공지사항',
     element: NewsFeedView,
     showInMenu: true,
-    authRequired: true,
+    authRequired: false,
     layout: ['header', 'nav', 'footer'],
   },
   {
     path: RouteLink.NEWS_DETAIL,
     element: NewsDetailView,
     showInMenu: false,
-    authRequired: true,
+    authRequired: false,
     layout: ['header', 'nav', 'footer'],
   },
   {
@@ -79,14 +79,14 @@ export const routeConfig: RouteMenuItem[] = [
     path: RouteLink.FORBIDDEN,
     element: Forbidden,
     showInMenu: false,
-    authRequired: true,
+    authRequired: false,
     layout: ['footer'],
   },
   {
     path: RouteLink.DEFAULT,
     element: NotFound,
     showInMenu: false,
-    authRequired: true,
+    authRequired: false,
     layout: ['footer'],
   },
 ];

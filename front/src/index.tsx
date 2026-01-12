@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './app';
+import App from './App';
+import { AuthProvider } from './context/AuthContext';
 import { initSentry } from './lib/sentry';
 import Store from './store/store';
 import GlobalStyle from './styles/global.style';
@@ -27,10 +28,12 @@ if (rootElement) {
   const root = createRoot(rootElement);
   root.render(
     <NewsStoreContext.Provider value={store}>
-      <React.StrictMode>
-        <GlobalStyle />
-        <App />
-      </React.StrictMode>
+      <AuthProvider>
+        <React.StrictMode>
+          <GlobalStyle />
+          <App />
+        </React.StrictMode>
+      </AuthProvider>
     </NewsStoreContext.Provider>,
   );
 }

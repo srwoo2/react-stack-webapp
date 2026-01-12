@@ -1,19 +1,36 @@
 require('dotenv').config();
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: './front/src/index.tsx',
   output: {
-    filename: '[name].[contenthash].js',
+    filename: '[name].js',
     path: path.resolve(__dirname, './dist'),
     publicPath: '/',
-    clean: true,
   },
-  devtool: false,
+  devtool: 'source-map',
+  devServer: {
+    port: 4002,
+    host: '0.0.0.0',
+    historyApiFallback: true,
+    server: {
+      type: 'https',
+      options: {
+        key: fs.readFileSync(path.resolve(__dirname, 'cert/key.pem')),
+        cert: fs.readFileSync(path.resolve(__dirname, 'cert/cert.pem')),
+      },
+    },
+    static: {
+      directory: path.join(__dirname, 'front/public'),
+    },
+    proxy: {
+      '/api': 'http://localhost:4000',
+    },
+  },
   module: {
     rules: [
       {
@@ -23,7 +40,7 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(jpe?g|gif|png|svg|ico)$/,
@@ -44,7 +61,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env.NODE_ENV': JSON.stringify('development'),
       'process.env.SENTRY_DSN': JSON.stringify(process.env.SENTRY_DSN),
       'process.env.GA_MEASUREMENT_ID': JSON.stringify(process.env.GA_MEASUREMENT_ID),
     }),
@@ -52,10 +69,12 @@ module.exports = {
       title: 'React Stack WebApp',
       template: './front/public/index.html',
       favicon: './front/public/favicon.ico',
-      minify: true,
     }),
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+    new HtmlWebpackPlugin({
+      title: 'React Stack WebApp',
+      template: './front/public/index.html',
+      filename: '404.html',
+      favicon: './front/public/favicon.ico',
     }),
   ],
   optimization: {
