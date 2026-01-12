@@ -2,8 +2,9 @@
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useNewsStore } from '../..';
 import APIs from '../../apis';
+import { useAppDispatch } from '../../store/hooks';
+import { makeRead } from '../../store/slices/newsSlice';
 import { CommonButton, CommonTitle } from '../../styles/common.style';
 import { NewsComment } from '../../types/newFeed.type';
 
@@ -36,7 +37,7 @@ const Comment: React.FC<{ comment: NewsComment }> = ({ comment }) => (
 const FreeBoardDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const store = useNewsStore();
+  const dispatch = useAppDispatch();
 
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -52,12 +53,12 @@ const FreeBoardDetail: React.FC = () => {
         setContent(content);
         setComments(comments);
 
-        store.makeRead(Number(id));
+        dispatch(makeRead(Number(id)));
       }
     };
 
     fetchDetail();
-  }, [id, store]);
+  }, [id, dispatch]);
 
   return (
     <div>

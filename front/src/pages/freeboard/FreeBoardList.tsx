@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useNewsStore } from '../..';
 import APIs from '../../apis';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { setFeeds } from '../../store/slices/newsSlice';
 import { CommonButton, CommonSubTitle, CommonTitle } from '../../styles/common.style';
 import { NewsFeed } from '../../types/newFeed.type';
 import { RouteLink } from '../../utils/constants';
 
 export const FreeBoardList: React.FC = () => {
-  const store = useNewsStore();
+  const dispatch = useAppDispatch();
+  const reduxFeeds = useAppSelector((state) => state.news.feeds);
   const { page = '1' } = useParams();
   const currentPage = Number(page);
   const [localfeeds, setLocalFeeds] = useState<NewsFeed[]>([]);
@@ -15,18 +17,18 @@ export const FreeBoardList: React.FC = () => {
 
   useEffect(() => {
     const fetchFeeds = async () => {
-      if (!(store.feeds.length > 0)) {
+      if (!(reduxFeeds.length > 0)) {
         const api = new APIs.Freeboard.NewsFeedApi();
         const data: NewsFeed[] = await api.getData();
         setLocalFeeds(data);
-        store.setFeeds(data);
+        dispatch(setFeeds(data));
       } else {
-        setLocalFeeds(store.feeds);
+        setLocalFeeds(reduxFeeds);
       }
     };
 
     fetchFeeds();
-  }, [store]);
+  }, [reduxFeeds, dispatch]);
 
   const itemsPerPage = 10;
   const start = (currentPage - 1) * itemsPerPage;

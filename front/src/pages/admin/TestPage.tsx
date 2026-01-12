@@ -1,42 +1,30 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import APIs from '../../apis';
-import * as Actions from '../../store/actions';
-import { asyncJobs, asyncRouter, logger, resetCountMiddleware } from '../../store/middleware';
-import reducer from '../../store/reducer';
-import { createStore } from '../../store/redux';
+import { RootState } from '../../store';
+import { asyncIncrease, decrease, increase, setCounter } from '../../store/slices/counterSlice';
 import { ProductType } from '../../types/core.type';
 
-// store 미들웨어 추가
-const store = createStore(reducer, [resetCountMiddleware, logger, asyncRouter(asyncJobs)]);
-
 const TestPage: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const count = useSelector((state: RootState) => state.counter.counter);
+  const isLoading = useSelector((state: RootState) => state.counter.request);
   const [productList, setProductList] = useState<ProductType[]>([]);
-  useEffect(() => {
-    const handler = () => {
-      const state = store.getState();
-      setCount(state?.counter ?? 0);
-      setIsLoading(state?.request);
-    };
-    store.subscribe(handler);
-  }, []);
 
   const handleIncrease = () => {
-    store.dispatch(Actions.increase());
+    dispatch(increase());
   };
 
   const handleAsyncIncrease = () => {
-    store.dispatch(Actions.asyncIncrease({ url: '/async-increase' }));
+    dispatch(asyncIncrease({ url: '/async-increase' }));
   };
 
   const handleDecrease = () => {
-    store.dispatch(Actions.decrease());
+    dispatch(decrease());
   };
 
   const handleReset = () => {
-    store.dispatch(Actions.setCounter(0));
+    dispatch(setCounter(0));
   };
 
   useEffect(() => {
