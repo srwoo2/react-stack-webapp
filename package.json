@@ -19,7 +19,7 @@
     "docs": "jsdoc -c jsdoc.config.json ."
   },
   "engines": {
-    "node": "20.10.0"
+    "node": "20.x"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

@@ -2,7 +2,7 @@
 
 React 스택으로 구축된 현대적인 웹 애플리케이션입니다.
 
-* 🔗 https://your-project.vercel.app
+* 🔗 https://react-stack-webapp.vercel.app
 
 ---
 

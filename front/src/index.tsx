@@ -1,8 +1,6 @@
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { createContext, useContext } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import App from './app';
 import { AuthProvider } from './context/AuthContext';
 import { initSentry } from './lib/sentry';
 import Store from './store/store';
