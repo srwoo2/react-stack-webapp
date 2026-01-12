@@ -7,11 +7,16 @@ import { RouteLink, UserRole } from '../../utils/constants';
 import { sampeople } from '../../utils/image.import';
 
 const Login: React.FC = () => {
-  const { login: authLogin } = useAuth();
+  const { login: authLogin, logout: authLogout } = useAuth();
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
+
+  React.useEffect(() => {
+    // 로그인 페이지에 진입하면 기존 쿠키 및 인증 상태 초기화
+    authLogout();
+  }, [authLogout]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;

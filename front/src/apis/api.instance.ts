@@ -5,7 +5,9 @@ import { getCookie, removeCookie } from '../utils/cookie';
 const api: AxiosInstance = axios.create();
 
 const handleError = (error: AxiosError): Promise<AxiosError> => {
-  removeCookie(CookieKey.ACCESS_TOKEN);
+  if (error.response?.status === 401) {
+    removeCookie(CookieKey.ACCESS_TOKEN);
+  }
   return Promise.reject(error);
 };
 
