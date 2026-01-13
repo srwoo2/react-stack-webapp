@@ -33,7 +33,13 @@ module.exports = {
         pathRewrite: { '^/api': '' },
         secure: false,
       },
+      '/api2': {
+        target: 'https://localhost:4001',
+        pathRewrite: { '^/api2': '' },
+        secure: false,
+      },
     },
+    hot: true,
   },
   module: {
     rules: [

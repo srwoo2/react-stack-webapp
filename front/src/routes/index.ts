@@ -10,7 +10,7 @@ import Main from '../pages/main';
 import NoticeDetail from '../pages/notice/NoticeDetail';
 import NoticeForm from '../pages/notice/NoticeForm';
 import NoticeList from '../pages/notice/NoticeList';
-import Schedule from '../pages/schedule';
+import Schedule from '../pages/mypage';
 import { RouteMenuItem } from '../types/core.type';
 import { RouteLink, UserRole } from '../utils/constants';
 
