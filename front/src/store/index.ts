@@ -1,7 +1,6 @@
 import { Action, configureStore, Middleware, ThunkAction } from '@reduxjs/toolkit';
 import counterReducer, { setCounter } from './slices/counterSlice';
 import newsReducer from './slices/newsSlice';
-import sectionReducer from './slices/sectionSlice';
 import userReducer from './slices/userSlice';
 
 // Existing local middlewares migrated to Redux
@@ -27,7 +26,6 @@ export const store = configureStore({
   reducer: {
     counter: counterReducer,
     news: newsReducer,
-    section: sectionReducer,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(resetCountMiddleware, loggerMiddleware),

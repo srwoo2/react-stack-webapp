@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import APIs from '../../apis';
-import { RootState } from '../../store';
-import { asyncIncrease, decrease, increase, setCounter } from '../../store/slices/counterSlice';
-import { ProductType } from '../../types/core.type';
+import APIs from '../../../apis';
+import { RootState } from '../../../store';
+import { asyncIncrease, decrease, increase, setCounter } from '../../../store/slices/counterSlice';
+import { ProductType } from '../../../types/core.type';
+import { CommonTitle } from '@/styles/common.style';
 
 const TestPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const TestPage: React.FC = () => {
 
   return (
     <>
-      <h1>Admin Test Page</h1>
+      <CommonTitle>API 관리</CommonTitle>
 
       <div>
         <p id="counter" className="text-2xl">

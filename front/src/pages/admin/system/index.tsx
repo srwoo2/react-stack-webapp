@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import api from '../../apis/api.instance';
-import Shell from '../../components/Shell';
+import { CommonTitle } from '@/styles/common.style';
+import api from '../../../apis/api.instance';
+import Shell from '../../../components/Shell';
 import { Searchbutton, SearchForm, SearchInput, SearchLabel } from './admin.style';
 import AdminHelp from './adminHelp';
 
@@ -127,6 +128,8 @@ const Admin: React.FC = () => {
 
   return (
     <>
+      <CommonTitle>서버 관리</CommonTitle>
+
       {/* 검색 옵션 */}
       <SearchForm onSubmit={handleSearch}>
         <SearchLabel htmlFor="keyword">키워드</SearchLabel>
