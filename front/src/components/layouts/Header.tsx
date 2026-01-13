@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
-import { ActionLink, HeaderActions, HeaderWrapper, LogoSection, StatusText } from '../styles/layout.style';
-import { RouteLink, WordKey } from '../utils/constants';
+import useAuth from '../../hooks/useAuth';
+import { RouteLink, WordKey } from '../../utils/constants';
+import { ActionLink, HeaderActions, HeaderWrapper, LogoSection, StatusText } from './layout.style';
 
 const Header: React.FC = () => {
   const { userId, logout: authLogout } = useAuth();

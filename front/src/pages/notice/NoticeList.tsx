@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Table, TH } from '../../components/Table';
-import { CommonButton, CommonTitle } from '../../styles/common.style';
+import { Button, Table, TH, Title } from '../../components/commons';
 import { RouteLink } from '../../utils/constants';
 import { formatDate } from '../../utils/utils';
 
@@ -43,7 +42,7 @@ const NoticeList: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>공지사항 목록</CommonTitle>
+      <Title>공지사항 목록</Title>
 
       <div style={{ marginBottom: '20px' }}>
         <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
@@ -151,12 +150,9 @@ const NoticeList: React.FC = () => {
         </div>
 
         <div style={{ position: 'absolute', right: 0 }}>
-          <CommonButton
-            onClick={() => navigate(RouteLink.NOTICE_WRITE)}
-            style={{ width: 'auto', padding: '10px 24px' }}
-          >
+          <Button onClick={() => navigate(RouteLink.NOTICE_WRITE)} style={{ width: 'auto', padding: '10px 24px' }}>
             글쓰기
-          </CommonButton>
+          </Button>
         </div>
       </div>
     </div>

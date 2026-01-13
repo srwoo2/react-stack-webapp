@@ -1,11 +1,11 @@
 import React from 'react';
-import { CommonTitle } from '../../../styles/common.style';
+import { Title } from '../../../components/commons';
 
 const Dashboard: React.FC = () => (
-    <div>
-      <CommonTitle>관리자 대시보드</CommonTitle>
-      <div>통계 및 요약 정보를 표시합니다.</div>
-    </div>
-  );
+  <div>
+    <Title>대시보드</Title>
+    <div>통계 및 요약 정보를 표시합니다.</div>
+  </div>
+);
 
 export default Dashboard;

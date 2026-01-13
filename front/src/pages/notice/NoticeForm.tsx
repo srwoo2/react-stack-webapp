@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { Button, Form, Input, SubTitle, Textarea, Title } from '../../components/commons';
 import useAuth from '../../hooks/useAuth';
-import {
-  CommonButton,
-  CommonForm,
-  CommonInput,
-  CommonSubTitle,
-  CommonTextarea,
-  CommonTitle,
-} from '../../styles/common.style';
 import { RouteLink, UserRole } from '../../utils/constants';
 import { formatDate } from '../../utils/utils';
 
@@ -79,16 +72,11 @@ const NoticeForm: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>공지사항 {isEdit ? '수정' : '등록'}</CommonTitle>
+      <Title>공지사항 {isEdit ? '수정' : '등록'}</Title>
 
-      <CommonForm onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
-        <CommonInput
-          placeholder="제목을 입력하세요"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <CommonTextarea
+      <Form onSubmit={handleSubmit} style={{ marginTop: '30px' }}>
+        <Input placeholder="제목을 입력하세요" value={title} onChange={(e) => setTitle(e.target.value)} required />
+        <Textarea
           placeholder="내용을 입력하세요"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -98,7 +86,7 @@ const NoticeForm: React.FC = () => {
         <div
           style={{ marginTop: '40px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '10px' }}
         >
-          <CommonButton
+          <Button
             type="button"
             onClick={() =>
               isEdit ? navigate(RouteLink.NOTICE_DETAIL.replace(':id', id || '')) : navigate(RouteLink.NOTICE)
@@ -106,12 +94,12 @@ const NoticeForm: React.FC = () => {
             style={{ width: 'auto', padding: '10px 24px', backgroundColor: '#86868b' }}
           >
             취소
-          </CommonButton>
-          <CommonButton type="submit" style={{ width: 'auto', padding: '10px 24px' }}>
+          </Button>
+          <Button type="submit" style={{ width: 'auto', padding: '10px 24px' }}>
             저장
-          </CommonButton>
+          </Button>
         </div>
-      </CommonForm>
+      </Form>
     </div>
   );
 };

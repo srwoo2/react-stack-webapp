@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { Button, Input, Title } from '../../components/commons';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { updateUserInfo } from '../../store/slices/userSlice';
-import { CommonButton, CommonInput, CommonTitle } from '../../styles/common.style';
 
 const MyPage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -50,7 +50,7 @@ const MyPage: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>마이페이지</CommonTitle>
+      <Title>마이페이지</Title>
 
       <div style={{ maxWidth: '800px', marginTop: '30px' }}>
         <form onSubmit={handleSubmit}>
@@ -60,7 +60,7 @@ const MyPage: React.FC = () => {
               <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
                 아이디
               </label>
-              <CommonInput
+              <Input
                 type="text"
                 value={user.id}
                 disabled
@@ -75,7 +75,7 @@ const MyPage: React.FC = () => {
             </div>
             <div>
               <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>이름</label>
-              <CommonInput
+              <Input
                 type="text"
                 name="name"
                 value={formData.name}
@@ -92,7 +92,7 @@ const MyPage: React.FC = () => {
               <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
                 생년월일
               </label>
-              <CommonInput
+              <Input
                 type="text"
                 value={user.birthDate}
                 disabled
@@ -107,7 +107,7 @@ const MyPage: React.FC = () => {
             </div>
             <div>
               <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>성별</label>
-              <CommonInput
+              <Input
                 type="text"
                 value={user.gender === 'M' ? '남성' : user.gender === 'F' ? '여성' : '-'}
                 disabled
@@ -127,7 +127,7 @@ const MyPage: React.FC = () => {
             <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
               휴대폰 번호
             </label>
-            <CommonInput
+            <Input
               type="tel"
               name="phoneNumber"
               value={formData.phoneNumber}
@@ -169,9 +169,9 @@ const MyPage: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <CommonButton type="submit" style={{ width: 'auto', padding: '12px 30px' }}>
+            <Button type="submit" style={{ width: 'auto', padding: '12px 30px' }}>
               저장
-            </CommonButton>
+            </Button>
           </div>
         </form>
       </div>

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import APIs from '../../apis';
-import { CommonTitle } from '../../styles/common.style';
+import { Title } from '../../components/commons';
 import { NewsFeed } from '../../types/newFeed.type';
 import { RouteLink } from '../../utils/constants';
 
@@ -90,7 +90,7 @@ export const FreeBoardList: React.FC = () => {
 
   return (
     <div>
-      <CommonTitle>자유게시판 목록</CommonTitle>
+      <Title>자유게시판 목록</Title>
 
       <div style={{ marginBottom: '20px' }}>
         <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
