@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title } from '@/components/commons';
+import { Title } from '../../components/commons';
 
 const Chat: React.FC = () => (
   <div>

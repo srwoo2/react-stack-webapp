@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Title } from '@/components/commons';
 import APIs from '../../../apis';
+import { Title } from '../../../components/commons';
 import { RootState } from '../../../store';
 import { asyncIncrease, decrease, increase, setCounter } from '../../../store/slices/counterSlice';
 import { ProductType } from '../../../types/core.type';

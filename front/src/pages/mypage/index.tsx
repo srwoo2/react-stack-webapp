@@ -48,6 +48,12 @@ const MyPage: React.FC = () => {
     alert('회원정보가 수정되었습니다.');
   };
 
+  const getGenderText = (gender: string) => {
+    if (gender === 'M') return '남성';
+    if (gender === 'F') return '여성';
+    return '-';
+  };
+
   return (
     <div>
       <Title>마이페이지</Title>
@@ -57,11 +63,12 @@ const MyPage: React.FC = () => {
           {/* 아이디 / 이름 섹션 */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
+              <label htmlFor="id" style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
                 아이디
               </label>
               <Input
                 type="text"
+                id="id"
                 value={user.id}
                 disabled
                 style={{
@@ -74,10 +81,15 @@ const MyPage: React.FC = () => {
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>이름</label>
+              <label
+                htmlFor="name"
+                style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}
+              >
+                이름
+              </label>
               <Input
                 type="text"
-                name="name"
+                id="name"
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="이름을 입력하세요"
@@ -89,11 +101,15 @@ const MyPage: React.FC = () => {
           {/* 생년월일 / 성별 섹션 */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
+              <label
+                htmlFor="birthDate"
+                style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}
+              >
                 생년월일
               </label>
               <Input
                 type="text"
+                id="birthDate"
                 value={user.birthDate}
                 disabled
                 style={{
@@ -106,10 +122,16 @@ const MyPage: React.FC = () => {
               />
             </div>
             <div>
-              <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>성별</label>
+              <label
+                htmlFor="gender"
+                style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}
+              >
+                성별
+              </label>
               <Input
                 type="text"
-                value={user.gender === 'M' ? '남성' : user.gender === 'F' ? '여성' : '-'}
+                id="gender"
+                value={getGenderText(user.gender)}
                 disabled
                 style={{
                   width: '100%',
@@ -124,11 +146,15 @@ const MyPage: React.FC = () => {
 
           {/* 휴대폰 번호 섹션 */}
           <div style={{ marginBottom: '40px' }}>
-            <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}>
+            <label
+              htmlFor="phoneNumber"
+              style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '8px' }}
+            >
               휴대폰 번호
             </label>
             <Input
               type="tel"
+              id="phoneNumber"
               name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -139,12 +165,13 @@ const MyPage: React.FC = () => {
 
           {/* 약관 동의 섹션 */}
           <div style={{ marginBottom: '40px', borderTop: '1px solid #eee', paddingTop: '30px' }}>
-            <label style={{ display: 'block', fontSize: '14px', color: '#86868b', marginBottom: '15px' }}>
-              약관 동의
-            </label>
+            <div style={{ fontSize: '14px', color: '#86868b', marginBottom: '15px' }}>약관 동의</div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '15px' }}>
+              <label
+                htmlFor="termsOfService"
+                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '15px' }}
+              >
                 <input
                   type="checkbox"
                   name="termsOfService"
@@ -155,7 +182,10 @@ const MyPage: React.FC = () => {
                 (필수) 이용약관 동의
               </label>
 
-              <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '15px' }}>
+              <label
+                htmlFor="privacyPolicy"
+                style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', fontSize: '15px' }}
+              >
                 <input
                   type="checkbox"
                   name="privacyPolicy"

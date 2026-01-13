@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/commons';
-import { RouteLink } from '../../utils/constants';
 
 const Forbidden: React.FC = () => {
   const navigate = useNavigate();

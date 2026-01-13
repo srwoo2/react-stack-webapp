@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Shell, Title } from '@/components/commons';
 import api from '../../../apis/api.instance';
+import { Shell, Title } from '../../../components/commons';
 import { Searchbutton, SearchForm, SearchInput, SearchLabel } from './admin.style';
 import AdminHelp from './adminHelp';
 

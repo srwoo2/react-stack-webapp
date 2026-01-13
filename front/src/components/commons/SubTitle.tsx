@@ -7,3 +7,5 @@ export const SubTitle = styled.h2`
   color: #1d1d1f;
   font-family: 'Inter', -apple-system, sans-serif;
 `;
+
+export default SubTitle;

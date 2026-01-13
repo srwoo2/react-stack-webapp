@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/commons';
-import { RouteLink } from '../../utils/constants';
+import { RouteLink } from '../../routes/routes';
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();

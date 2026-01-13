@@ -6,3 +6,5 @@ export const InputHelperText = styled.p`
   line-height: 1.6;
   color: red;
 `;
+
+export default InputHelperText;

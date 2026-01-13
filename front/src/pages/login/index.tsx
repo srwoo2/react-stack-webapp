@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Form, Image, Input, InputHelperText } from '../../components/commons';
 import { LoginLayout } from '../../components/layouts/layout.style';
+import { UserRole } from '../../constants/app.config';
 import useAuth from '../../hooks/useAuth';
-import { RouteLink, UserRole } from '../../utils/constants';
-import { sampeople } from '../../utils/image.import';
+import { RouteLink } from '../../routes/routes';
+import { sampeople } from '../../utils/images';
 
 const Login: React.FC = () => {
   const { login: authLogin, logout: authLogout } = useAuth();

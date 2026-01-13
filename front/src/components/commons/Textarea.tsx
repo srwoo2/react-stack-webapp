@@ -10,3 +10,5 @@ export const Textarea = styled.textarea`
   font-size: 16px;
   resize: none;
 `;
+
+export default Textarea;

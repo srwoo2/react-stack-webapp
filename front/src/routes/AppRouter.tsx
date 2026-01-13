@@ -6,7 +6,7 @@ import { StyledArticle, StyledContent, StyledMain } from '../components/layouts/
 import Nav from '../components/layouts/Nav';
 import ProtectedRoute from '../components/providers/ProtectedRoute';
 import useAccess from '../hooks/useAccess';
-import { routeConfig } from './index';
+import { routeConfig } from './route.config';
 
 const AppRouter: React.FC = () => {
   const { currentRoute } = useAccess();

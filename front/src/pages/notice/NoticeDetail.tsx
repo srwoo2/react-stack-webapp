@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Title } from '../../components/commons';
+import { UserRole } from '../../constants/app.config';
 import useAuth from '../../hooks/useAuth';
-import { RouteLink, UserRole } from '../../utils/constants';
+import { RouteLink } from '../../routes/routes';
 
 interface Post {
   id: number;

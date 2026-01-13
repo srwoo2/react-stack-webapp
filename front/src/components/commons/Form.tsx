@@ -7,3 +7,5 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 16px;
 `;
+
+export default Form;

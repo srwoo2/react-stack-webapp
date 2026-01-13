@@ -1,3 +1,5 @@
+import { RouteLink } from './routes';
+import { UserRole } from '../constants/app.config';
 import ApiManagement from '../pages/admin/apis';
 import Dashboard from '../pages/admin/dashboard';
 import MemberManagement from '../pages/admin/members';
@@ -15,7 +17,6 @@ import NoticeDetail from '../pages/notice/NoticeDetail';
 import NoticeForm from '../pages/notice/NoticeForm';
 import NoticeList from '../pages/notice/NoticeList';
 import { RouteMenuItem } from '../types/core.type';
-import { RouteLink, UserRole } from '../utils/constants';
 
 export const routeConfig: RouteMenuItem[] = [
   {

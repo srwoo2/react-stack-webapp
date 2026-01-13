@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { WordKey } from '../../constants/messages';
 import useAuth from '../../hooks/useAuth';
-import { RouteLink, WordKey } from '../../utils/constants';
+import { RouteLink } from '../../routes/routes';
 import { ActionLink, HeaderActions, HeaderWrapper, LogoSection, StatusText } from './layout.style';
 
 const Header: React.FC = () => {

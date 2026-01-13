@@ -9,3 +9,5 @@ export const Title = styled.h1`
   border-bottom: 1px solid #d1d2d7;
   color: #1d1d1f;
 `;
+
+export default Title;
