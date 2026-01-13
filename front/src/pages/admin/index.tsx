@@ -120,7 +120,7 @@ const Admin: React.FC = () => {
   };
 
   const handleLogRequest = async () => {
-    await api.get('/api/test').finally(() => {
+    await api.get('/api2/test').finally(() => {
       setOutput([logs]);
     });
   };

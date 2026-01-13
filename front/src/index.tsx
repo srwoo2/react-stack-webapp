@@ -1,37 +1,31 @@
-import React, { createContext, useContext } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import App from './app';
 import { AuthProvider } from './context/AuthContext';
 import { initSentry } from './lib/sentry';
-import Store from './store/store';
+import { store } from './store';
 import GlobalStyle from './styles/global.style';
-import { NewsStore } from './types/newFeed.type';
+
+
+const queryClient = new QueryClient();
 
 initSentry();
-
-const NewsStoreContext = createContext<NewsStore | undefined>(undefined);
-
-export const useNewsStore = () => {
-  const context = useContext(NewsStoreContext);
-  if (!context) {
-    throw new Error('useNewsStore must be used within a NewsStoreProvider');
-  }
-  return context;
-};
-
-const store = new Store();
 
 const rootElement = document.getElementById('root');
 if (rootElement) {
   const root = createRoot(rootElement);
   root.render(
-    <NewsStoreContext.Provider value={store}>
-      <AuthProvider>
-        <React.StrictMode>
-          <GlobalStyle />
-          <App />
-        </React.StrictMode>
-      </AuthProvider>
-    </NewsStoreContext.Provider>,
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <React.StrictMode>
+            <GlobalStyle />
+            <App />
+          </React.StrictMode>
+        </AuthProvider>
+      </QueryClientProvider>
+    </Provider>,
   );
 }

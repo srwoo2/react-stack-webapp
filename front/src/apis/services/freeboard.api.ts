@@ -1,7 +1,9 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-undef */
-import { NewsDetail, NewsFeed } from '../types/newFeed.type';
-import { CONTENT_URL, NEWS_URL } from './api';
+import { NewsDetail, NewsFeed } from '../../types/newFeed.type';
+
+export const NEWS_URL = 'https://api.hnpwa.com/v0/news/1.json';
+export const CONTENT_URL = 'https://api.hnpwa.com/v0/item/@id.json';
 
 export default class Api {
   url: string;

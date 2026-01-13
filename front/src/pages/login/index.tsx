@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { CommonButton, CommonForm, CommonImage, CommonInput, CommonInputText } from '../../styles/common.style';
 import { LoginLayout } from '../../styles/layout.style';
-import { UserRole } from '../../utils/constants';
+import { RouteLink, UserRole } from '../../utils/constants';
 import { sampeople } from '../../utils/image.import';
 
 const Login: React.FC = () => {
-  const { login: authLogin } = useAuth();
+  const { login: authLogin, logout: authLogout } = useAuth();
   const navigate = useNavigate();
   const [userId, setUserId] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [msg, setMsg] = useState<string>('');
+
+  React.useEffect(() => {
+    // 로그인 페이지에 진입하면 기존 쿠키 및 인증 상태 초기화
+    authLogout();
+  }, [authLogout]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
@@ -30,7 +35,7 @@ const Login: React.FC = () => {
       const accessToken = 'abcdefg';
 
       authLogin(userId, role, accessToken);
-      navigate('/');
+      navigate(RouteLink.MAIN);
     } else {
       setMsg('아이디와 비밀번호를 확인하세요.');
     }
@@ -38,7 +43,9 @@ const Login: React.FC = () => {
 
   return (
     <LoginLayout>
-      <CommonImage src={sampeople} alt="netflix logo" width={180} height={100} />
+      <Link to={RouteLink.MAIN}>
+        <CommonImage src={sampeople} alt="logo" width={180} height={100} />
+      </Link>
 
       <CommonForm onSubmit={login}>
         <CommonInput type="text" id="userId" value={userId} onChange={handleChange} placeholder="아이디" />

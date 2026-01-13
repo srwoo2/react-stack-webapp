@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
 export const CommonTitle = styled.h1`
-  font-size: 20px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  font-size: 25px;
   font-weight: 600;
-  color: #1d1d1f;
   font-family: 'Inter', -apple-system, sans-serif;
+  border-bottom: 1px solid #d1d2d7;
+  color: #1d1d1f;
 `;
 
 export const CommonSubTitle = styled.h2`
   margin-bottom: 20px;
-  font-size: 16px;
-  color: #b1b1b1;
+  font-size: 18px;
+  font-weight: 400;
+  color: #1d1d1f;
   font-family: 'Inter', -apple-system, sans-serif;
 `;
 
@@ -56,9 +60,21 @@ export const CommonInput = styled.input`
   width: 100%;
   height: 48px;
   padding: 16px;
+  border-radius: 8px;
   border: 1px solid #d2d2d7;
-  background: #f5f5f7;
+  background: #fff;
   font-size: 16px;
+`;
+
+export const CommonTextarea = styled.textarea`
+  width: 100%;
+  height: 300px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #d2d2d7;
+  background: #fff;
+  font-size: 16px;
+  resize: none;
 `;
 
 export const CommonInputText = styled.p`

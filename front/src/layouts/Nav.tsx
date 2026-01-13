@@ -27,7 +27,7 @@ const Nav: React.FC = () => {
       <StyledNavItemWrap>
         {menuItems.map((item) => (
           <StyledNavItem key={item.path}>
-            <StyledNavItemIink as={Link} to={item.path}>
+            <StyledNavItemIink as={Link} to={item.path.replace(':page', '1')}>
               {item.label}
             </StyledNavItemIink>
           </StyledNavItem>

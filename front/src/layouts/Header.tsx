@@ -24,6 +24,7 @@ const Header: React.FC = () => {
         {userId ? (
           <>
             <StatusText>{userId}님</StatusText>
+            <ActionLink onClick={() => navigate(RouteLink.SCHEDULE)}>마이페이지</ActionLink>
             <ActionLink onClick={logout}>로그아웃</ActionLink>
           </>
         ) : (
